@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Page</title>
+
+    <style>
+        h {
+            font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+        }
+
+        #title {
+            font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+            position: absolute;
+            top: 25px;
+            left: 100px;
+        }
+
+        #explanation{
+            font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+            position: absolute;
+            top: 70px;
+            left: 100px;
+            width: 600px;
+        }
+
+        #questions1 {
+            font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+            position: absolute;
+            top: 300px;
+            left: 100px;
+        }
+
+        #questions2 {
+            font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+            position: absolute;
+            top: 300px;
+            left: 700px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div id="title">
+    <h1>Demo</h1>
+</div>
+
+<div id="explanation">
+    <p>This Demo Page contains some of the frq 6 of AP Music Theory, which is
+        the same format of a four part harmony question that we are completing.
+        (or we should say, that Harmonia Conserta follows the exam format).
+        Click on the question and we will import the question information, and return you the
+        solution that best following the 18 century four part harmony writing guidelines.
+        (see the guides from the home page.)
+        .</p>
+</div>
+
+<div id="questions1">
+
+    <ul>
+        <li>
+            <h4><a href="{{ url_for('show_page', i=2002) }}">Frq of 2002</a></h4>
+            <img src="{{ url_for('static', filename='img/frq/2002.png') }}" width="500">
+        </li>
+        <li>
+            <h4><a href="{{ url_for('show_page', i=2003) }}">Frq of 2003</a></h4>
+            <img src="{{ url_for('static', filename='img/frq/2003.png') }}" width="500">
+        </li>
+        <li>
+            <h4><a href="{{ url_for('show_page', i=2006) }}">Frq of 2006</a></h4>
+            <img src="{{ url_for('static', filename='img/frq/2006.png') }}" width="500">
+        </li>
+        <li>
+            <h4><a href="{{ url_for('show_page', i=2007) }}">Frq of 2007</a></h4>
+            <img src="{{ url_for('static', filename='img/frq/2007.png') }}" width="500">
+        </li>
+        <li>
+            <h4><a href="{{ url_for('show_page', i=2009) }}">Frq of 2009</a></h4>
+            <img src="{{ url_for('static', filename='img/frq/2009.png') }}" width="500">
+        </li>
+    </ul>
+</div>
+
+<div id="questions2">
+
+    <ul>
+
+        <li>
+            <h4><a href="{{ url_for('show_page', i=2010) }}">Frq of 2010</a></h4>
+            <img src="{{ url_for('static', filename='img/frq/2010.png') }}" width="500">
+        </li>
+        <li>
+            <h4><a href="{{ url_for('show_page', i=2012) }}">Frq of 2012</a></h4>
+            <img src="{{ url_for('static', filename='img/frq/2012.png') }}" width="500">
+        </li>
+        <li>
+            <h4><a href="{{ url_for('show_page', i=2013) }}">Frq of 2013</a></h4>
+            <img src="{{ url_for('static', filename='img/frq/2013.png') }}" width="500">
+        </li>
+        <li>
+            <h4><a href="{{ url_for('show_page', i=2014) }}">Frq of 2014</a></h4>
+            <img src="{{ url_for('static', filename='img/frq/2014.png') }}" width="500">
+        </li>
+        <li>
+            <h4><a href="{{ url_for('show_page', i=2015) }}">Frq of 2015</a></h4>
+            <img src="{{ url_for('static', filename='img/frq/2015.png') }}" width="500">
+        </li>
+    </ul>
+
+</div>
+
+
+
+</body>
+</html>

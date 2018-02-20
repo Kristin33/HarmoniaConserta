@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+	<head>
+		<title>Input</title>
+
+        <script>
+            function checkInput() {
+                var keySign = document.getElementsByName("keySign").value;
+                var textValue = text.replace(/(^\s*)|(\s*$)/g, "");
+                if(textValue==null || textValue=="") {
+                    alert("please fill out all the blanks");
+                    return false;
+                }
+            }
+        </script>
+
+	</head>
+
+	<style>
+        #input_form{
+            font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+            position: absolute;
+            top: 60px;
+            left: 700px;
+            width: 570px;
+        }
+
+        #instructions{
+            font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            width: 600px;
+        }
+			
+    </style>
+
+
+	<body>
+
+		<!-- form for user's input -->
+		<form action="{{ url_for('input_page') }}" method="post" id="input_form">
+			<fieldset>
+				<!-- context: key signatue and time signature -->
+				<legend>Context</legend>
+				Key Signature:<br>
+				<input type="text" name="keySign" size="80" placeholder="major keys: uppercase letter; minor keys: lower case letter. e.g: A#, C, Bb">
+				<br><br>
+			</fieldset>
+            <br>
+            <fieldset>
+                <legend>The First Chord</legend>
+                Notes of the First Chord:<br>
+                Usually, the first Chord is the tonic. <br>
+                <input type="text" name="firstChord1" size="13" placeholder="e.g A3, E5, Db4">
+                <input type="text" name="firstChord2" size="13" placeholder="e.g A3, E5, Db4">
+                <input type="text" name="firstChord3" size="13" placeholder="e.g A3, E5, Db4">
+                <input type="text" name="firstChord4" size="13" placeholder="e.g A3, E5, Db4"><br><br>
+            </fieldset>
+            <br>
+			<fieldset id="harmony">
+				<!-- seven chords, each has chord, inversion, suspension, or secondary -->
+				<legend>Harmony</legend>
+				Chord 1:<br>
+				<input type="text" name="chord1" size="15" placeholder="scale degree">
+				<input type="text" name="chord1inv" size="15" placeholder="inversion">
+				<input type="text" name="chord1sec" size="15" placeholder="secondary"><br>
+				<br>
+				Chord 2:<br>
+				<input type="text" name="chord2" size="15" placeholder="scale degree">
+				<input type="text" name="chord2inv" size="15" placeholder="inversion">
+				<input type="text" name="chord2sec" size="15" placeholder="secondary"><br>
+				<br>
+				Chord 3:<br>
+				<input type="text" name="chord3" size="15" placeholder="scale degree">
+				<input type="text" name="chord3inv" size="15" placeholder="inversion">
+				<input type="text" name="chord3sec" size="15" placeholder="secondary"><br>
+				<br>
+				Chord 4:<br>
+				<input type="text" name="chord4" size="15" placeholder="scale degree">
+				<input type="text" name="chord4inv" size="15" placeholder="inversion">
+				<input type="text" name="chord4sec" size="15" placeholder="secondary"><br>
+				<br>
+				Chord 5:<br>
+				<input type="text" name="chord5" size="15" placeholder="scale degree">
+				<input type="text" name="chord5inv" size="15" placeholder="inversion">
+				<input type="text" name="chord5sec" size="15" placeholder="secondary"><br>
+				<br>
+				Chord 6:<br>
+				<input type="text" name="chord6" size="15" placeholder="scale degree">
+				<input type="text" name="chord6inv" size="15" placeholder="inversion">
+				<input type="text" name="chord6sec" size="15" placeholder="secondary"><br>
+				<br>
+				Chord 7:<br>
+				<input type="text" name="chord7" size="15" placeholder="scale degree">
+				<input type="text" name="chord7inv" size="15" placeholder="inversion">
+				<input type="text" name="chord7sec" size="15" placeholder="secondary"><br>
+				<br>
+			</fieldset>
+
+			<input type="submit" value="Submit" onclick="checkInput()">
+
+		</form>
+
+		<!-- instructions for filling the form -->
+		<div id="instructions">
+            <h3>Input Instructions</h3>
+
+            <img src="{{ url_for('static', filename='img/d2.png') }}" width="400">
+            <br>(sample question)
+
+            <h4>The context</h4>
+            * We can do the writing on any key, so feel free to give us key signatures! <br>
+            e.g: A# --> sharp A major; fb --> flat f minor; G --> G major.<br>
+            * Since all the chords are of the same length, we don't need the time signature input
+            and set it to 4/4.
+
+            <h4>The first Chord</h4>
+            * As in the question, the four voices in the first chord is given, so that
+            we can follow the voice leading procedure to write the following chords.
+            <br>
+            * Also, you need to input the length of the first chord, like 'half', 'quarter'. <br>
+            * Note: Even we have key signature, do not forget accidentals! <br>
+            e.g: F2 --> F on the second octave (the bottom line on bass clef!)<br>
+            G5 --> G on the fifth octave (the highest space on treble clef! )<br>
+            Db4 --> flat D on the fourth octave.
+
+			<h4>Harmony -- Roman Numerals</h4>
+            * Drawing a whole roman numeral for us might be hard -- so you can break it down
+            into parts in the input: scale degree, inversion, suspension, secondary. <br>
+			* Input either number or roman numerals for the scale degree. For example, "2"
+			or "II" or "ii" for the supertonic chord.
+            <br>
+			* Inversions: 6, 64, 7, 65, 43, 42, or leave it blank!
+			<br>
+			* If the chord is a secondary chord, indicate which key that it is functioning in.
+			For example: V/IV is the dominant of the subdominant, indicate the subdominant in the 
+			"secondary" blank. Either input IV or 4 is okay.
+			<br>
+
+		</div>
+
+
+	</body>
+
+
+</html>

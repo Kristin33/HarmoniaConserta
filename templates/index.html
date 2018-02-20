@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Harmonia Conserta</title>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/vexflow-min.js') }}"></script>
+
+	<style>
+			#Music {
+				position: absolute;
+				width: 900px;
+				height: 230px;
+				left: 250px;
+				top: 150px;
+			}
+
+			div.Roman{
+				position: absolute;
+				width: 900px;
+				height: 100px;
+				left: 250px;
+				top: 380px;
+			}
+
+			#boo{}
+			#name {
+				font-family: script; 
+				font-size: 160%;
+				position:absolute; 
+				width:400px; 
+				height: 100px; 
+				left: 470px; 
+				top:80px;}
+
+			#guide {
+				font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+				position: absolute;
+				font-size: 12px;
+				left:900px;
+				top:130px;
+			}
+
+			#input {
+				font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+				position: absolute;
+				font-size: 12px;
+				left:350px;
+				top:130px;
+			}
+
+            #demo {
+                font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+                position: absolute;
+                font-size: 12px;
+                left: 270px;
+                top: 130px;
+            }
+
+			a {
+				color: black;
+  				border-bottom: solid 2px black;
+			}
+
+		</style>
+
+</head>
+
+
+	<body>		
+
+		<!-- music area -->
+		<div id="Music"></div>
+
+		<!-- the title -->
+		<div id="name">
+			<p><h1>Harmonia Conserta</h1></p>
+		</div>
+
+		<!-- guide button -->
+		<div id="guide">
+			<a href={{ url_for('guide_page') }}><h2>User's Guide</h2></a>
+		</div>
+
+		<!-- input button -->
+		<div id="input">
+			<a href="{{ url_for('input_page') }}"><h2>Input</h2></a>
+		</div>
+
+        <!-- demo button -->
+		<div id="demo">
+			<a href="{{ url_for('demo_page') }}"><h2>Demo</h2></a>
+		</div>
+
+		<!-- the roman numerals under the stave, as an image -->
+		<div class="Roman">
+			<img src="{{ url_for('static', filename="img/d1.png") }}" width="750">
+		</div>
+
+    {#     render the music #}
+	<script type="text/javascript">
+
+		VF = Vex.Flow;
+
+	    // Create an SVG renderer and attach it to the DIV element named "Music".
+	    var div = document.getElementById("Music")
+	    var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+
+	    var canvasDimensions = {
+	        width: 900,
+	        height: 230
+	    };
+
+	    // Configure the rendering context.
+	    renderer.resize(canvasDimensions.width, canvasDimensions.height);
+	    var context = renderer.getContext();
+	    context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
+
+
+	    /**
+	    * Left side staves 
+	    */
+
+	    // Create a stave with treble clef of width 800 at position x10, y40 on the canvas.
+	    var stave1 = new VF.Stave(10, 40, 800);
+	    // Add a clef and time signature.
+	    stave1.addClef("treble").addKeySignature("Eb").addTimeSignature("4/4");
+	    // Connect it to the rendering context and draw!
+	    stave1.setContext(context).draw();
+
+	    // Create a stave with bass clef width 800 at position x10, y120 on the canvas.
+	    var stave2 = new VF.Stave(10, 120, 800);
+	    stave2.addClef("bass").addKeySignature("Eb").addTimeSignature("4/4");
+	    stave2.setContext(context).draw();
+
+	    // Create the notes
+		var notes1 = [
+		  new VF.StaveNote({ keys: ["e/5"], duration: "q" }),
+            {#new VF.BarNote()#}
+        ];
+
+		var notes2 = [
+		  new VF.StaveNote({ keys: ["g/4"], duration: "q", stem_direction: -1 })
+        ];
+
+		var notes3 = [
+		  new VF.StaveNote({ keys: ["f/2"], duration: "q", clef: 'bass' })
+        ];
+
+		var notes4 = [
+		  new VF.StaveNote({ keys: ["e/3"], duration: "q", stem_direction: -1, clef: 'bass' })
+        ];
+
+		// Create a voice in 4/4 and add above notes
+		var voices1 = [
+			new VF.Voice({num_beats: 1,  beat_value: 4}).addTickables(notes1).setStrict(false),
+			new VF.Voice({num_beats: 1,  beat_value: 4}).addTickables(notes2).setStrict(false)]
+
+		var voices2 = [
+			new VF.Voice({num_beats: 1,  beat_value: 4}).addTickables(notes3).setStrict(false),
+			new VF.Voice({num_beats: 1,  beat_value: 4}).addTickables(notes4).setStrict(false)]
+
+		// Format and justify the notes to 700 pixels.
+		var formatter1 = new VF.Formatter().joinVoices(voices1).format(voices1, 700);
+		var formatter2 = new VF.Formatter().joinVoices(voices2).format(voices2, 700);
+
+		// Render voices
+		voices1.forEach(function(v) { v.draw(context, stave1); })
+		voices2.forEach(function(v) { v.draw(context, stave2); })
+
+
+	</script>
+
+
+
+
+	</body>
+</html>

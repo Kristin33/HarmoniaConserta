@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Show</title>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/vexflow-min.js') }}"></script>
+
+
+    <style>
+			#Solution {
+				position: absolute;
+				width: 900px;
+				height: 300px;
+				left: 100px;
+				top: 50px;
+			}
+
+            #explanation{
+                font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+                position: absolute;
+                width: 300px;
+                height: 500px;
+                left: 900px;
+                top: 50px;
+            }
+
+            #back{
+                font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+                position: absolute;
+                left: 100px;
+                top: 500px;
+            }
+
+
+		</style>
+
+</head>
+
+
+	<body>
+
+		<!-- music area -->
+		<div id="Solution"></div>
+
+        {# play the music#}
+        <div id="playSolution">
+            <embed src="{{ url_for('static', filename='mid/solution.mid') }}" controls=smallconsole>
+        </div>
+
+{#     render the Solution #}
+	<script type="text/javascript">
+
+
+		VF = Vex.Flow;
+
+	    // Create an SVG renderer and attach it to the DIV element named "Music".
+	    var div = document.getElementById("Solution")
+	    var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+
+	    var canvasDimensions = {
+	        width: 900,
+	        height: 270
+	    };
+
+	    // Configure the rendering context.
+	    renderer.resize(canvasDimensions.width, canvasDimensions.height);
+	    var context = renderer.getContext();
+	    context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
+
+
+	    /**
+	    * Left side staves
+	    */
+
+	    // Create a stave with treble clef of width 800 at position x10, y40 on the canvas.
+	    var stave1 = new VF.Stave(10, 40, 700);
+	    // Add a clef and time signature.
+	    stave1.addClef("treble").addKeySignature({{ solution.get('keySign')|tojson }})
+            .addTimeSignature({{ solution.get('timeSign')|tojson }});
+	    // Connect it to the rendering context and draw!
+	    stave1.setContext(context).draw();
+
+	    // Create a stave with bass clef width 800 at position x10, y120 on the canvas.
+	    var stave2 = new VF.Stave(10, 150, 700);
+	    stave2.addClef("bass").addKeySignature({{ solution.get('keySign')|tojson }})
+            .addTimeSignature({{ solution.get('timeSign')|tojson }});
+	    stave2.setContext(context).draw();
+
+	    // Create the notes
+		var notes1 = [
+		  new VF.StaveNote({ keys: [{{ solution.get('v1n1Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }} }),
+		  new VF.StaveNote({ keys: [{{ solution.get('v1n2Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }} }),
+		  new VF.StaveNote({ keys: [{{ solution.get('v1n3Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }} }),
+		  new VF.StaveNote({ keys: [{{ solution.get('v1n4Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }} }),
+            new VF.BarNote(),
+		  new VF.StaveNote({ keys: [{{ solution.get('v1n5Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }} }),
+		  new VF.StaveNote({ keys: [{{ solution.get('v1n6Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }} }),
+		  new VF.StaveNote({ keys: [{{ solution.get('v1n7Key')|tojson }}],
+              duration: {{ solution.get('v1n7Dur')|tojson }} })
+        ];
+
+		var notes2 = [
+		  new VF.StaveNote({ keys:[{{ solution.get('v2n1Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1 }),
+		  new VF.StaveNote({ keys:[{{ solution.get('v2n2Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1 }),
+		  new VF.StaveNote({ keys:[{{ solution.get('v2n3Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1 }),
+		  new VF.StaveNote({ keys:[{{ solution.get('v2n4Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1 }),
+            new VF.BarNote(),
+		  new VF.StaveNote({ keys:[{{ solution.get('v2n5Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1 }),
+		  new VF.StaveNote({ keys:[{{ solution.get('v2n6Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1 }),
+		  new VF.StaveNote({ keys:[{{ solution.get('v2n7Key')|tojson }}],
+              duration:{{ solution.get('v1n7Dur')|tojson }},stem_direction:-1 })
+        ];
+
+		var notes3 = [
+		  new VF.StaveNote({ keys: [{{ solution.get('v3n1Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }}, clef: 'bass' }),
+		  new VF.StaveNote({ keys: [{{ solution.get('v3n2Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }}, clef: 'bass' }),
+		  new VF.StaveNote({ keys: [{{ solution.get('v3n3Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }}, clef: 'bass' }),
+		  new VF.StaveNote({ keys: [{{ solution.get('v3n4Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }}, clef: 'bass' }),
+            new VF.BarNote(),
+		  new VF.StaveNote({ keys: [{{ solution.get('v3n5Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }}, clef: 'bass' }),
+		  new VF.StaveNote({ keys: [{{ solution.get('v3n6Key')|tojson }}],
+              duration: {{ solution.get('v1n1Dur')|tojson }}, clef: 'bass' }),
+		  new VF.StaveNote({ keys: [{{ solution.get('v3n7Key')|tojson }}],
+              duration: {{ solution.get('v1n7Dur')|tojson }}, clef: 'bass' })
+        ];
+
+		var notes4 = [
+		  new VF.StaveNote({ keys:[{{ solution.get('v4n1Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1, clef: 'bass' }),
+		  new VF.StaveNote({ keys:[{{ solution.get('v4n2Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1, clef: 'bass' }),
+		  new VF.StaveNote({ keys:[{{ solution.get('v4n3Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1, clef: 'bass' }),
+		  new VF.StaveNote({ keys:[{{ solution.get('v4n4Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1, clef: 'bass' }),
+            new VF.BarNote(),
+		  new VF.StaveNote({ keys:[{{ solution.get('v4n5Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1, clef: 'bass' }),
+		  new VF.StaveNote({ keys:[{{ solution.get('v4n6Key')|tojson }}],
+              duration:{{ solution.get('v1n1Dur')|tojson }},stem_direction:-1, clef: 'bass' }),
+		  new VF.StaveNote({ keys:[{{ solution.get('v4n7Key')|tojson }}],
+              duration:{{ solution.get('v1n7Dur')|tojson }},stem_direction:-1, clef: 'bass' })
+        ];
+
+		var voice1 = new VF.Voice({num_beats: 8,  beat_value: 4}).addTickables(notes1).setStrict(false);
+		var voice2 = new VF.Voice({num_beats: 8,  beat_value: 4}).addTickables(notes2).setStrict(false);
+		var voice3 = new VF.Voice({num_beats: 8,  beat_value: 4}).addTickables(notes3).setStrict(false);
+		var voice4 = new VF.Voice({num_beats: 8,  beat_value: 4}).addTickables(notes4).setStrict(false);
+
+		// manage the accidentals
+        Vex.Flow.Accidental.applyAccidentals([voice1, voice2, voice3, voice4], {{ solution.get('keySign')|tojson }});
+
+		// Combine the voices for treble and for bass, and add above notes
+		var voicesUp = [voice1, voice2]
+		var voicesDown = [voice3, voice4]
+
+		// Format and justify the notes to 700 pixels.
+		var formatter1 = new VF.Formatter().joinVoices(voicesUp).format(voicesUp, 700);
+		var formatter2 = new VF.Formatter().joinVoices(voicesDown).format(voicesDown, 700);
+
+		// Render voices
+		voicesUp.forEach(function(v) { v.draw(context, stave1); })
+		voicesDown.forEach(function(v) { v.draw(context, stave2); })
+
+
+	</script>
+
+        <div id="explanation">
+            <p>On the left side is your solution! Note that if multiple ansers satisfy the
+            restrictions, there is a certain randomness in the choosing. That is,
+            it might return different answers each time. </p>
+        </div>
+
+        <div id="back">
+            <a href="{{ url_for('index') }}">Back to <font face=script size=100%>Harmonia Conserta</font></a>
+        </div>
+
+        <div id="error">
+
+        </div>
+
+
+	</body>
+</html>

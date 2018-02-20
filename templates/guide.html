@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+	<head>
+		<title>User's Guide</title>
+	</head>
+
+	<style>
+			div.intro{
+				font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+				font-size: 18px;
+				position: relative;
+				width: 900px;
+				height: 400px;
+				left: 200px;
+				top:50px;
+				line-height: 130%;
+			}
+
+			div.text{
+				font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+				font-size: 18px;
+				position: relative;
+				width: 900px;
+				height: 300px;
+				left: 200px;
+				line-height: 130%;
+			}
+
+			div.name{
+				font-family: script; 
+				font-size: 100%;
+				position:relative; 
+				width:300px;
+				height: 70px;  
+				top:10px;}
+
+			a {
+				color: green;
+				text-decoration: none;
+  				border-bottom: solid 1px green;
+			}
+
+			#guide {
+				font-family: script;
+				position: absolute;
+				left:900px;
+				top:120px;
+			}
+		</style>
+
+
+	<body>
+
+		<div class="intro">
+			<div class="name"><h1>What is Harmonia Conserta?</h1></div>
+			<p>Harmonia Conserta can complete a short four part harmony on a given key and 
+				harmonic progression. The harmonic writing will strictly follow the rules of 
+				<a href={{ url_for('rules_page') }}>eighteenth century voice leading procedures.</a> This includes forbidding parallel/hidden/unequal/direct perfect intervals, overlapping/crossed
+				voices, uncharacteristic leaps and so on and so on. Please do check it out 
+				and see how weird they are!</p>
+			<p>This project, of course, was inspired by the tedious harmonic free response
+			    question practices that I encountered when preparing for the AP music theory 
+			    exam. </p>
+
+		</div>
+
+		<div class="text">
+			<div class="name"><h1>How to use it?</h1></div>
+			<p>You can either input your own your harmony question, following the input instructions
+                or see the demo questions from the
+            past exams. Note that some 'uncharacteristic' inputs will result in no satisfactory answers:)
+            </p>
+
+		</div>
+
+
+		<div class="text">
+
+			<div class="name"><h1>Acknowledgment</h1></div>
+			<p>Special thanks to: </p>
+			<ul>
+				<li>
+					Webpage music rendering API: <a href="http://www.vexflow.com/" target="view_window">Vexflow</a>
+				</li>
+				<li>
+					Music theory toolkit:<a href="http://web.mit.edu/music21/" target="view_window">Music21</a>
+				</li>
+				<li>
+					Harmonic writing resources provided by: <a href="https://apstudent.collegeboard.org/apcourse/ap-music-theory" target="view_window">AP Music Theory | CollegeBoard </a>
+				</li>
+			</ul>
+
+		</div>
+
+		<div class="text">
+
+			<div class="name"><h1>Keep in touch</h1></div>
+			<p>Author: huanz@andrew.cmu.edu</p>
+			<p>The Github Repository of Harmonia Conserta</p>
+			
+
+		</div>
+	
+		<div class="text">
+
+			<div class="name"><a href={{ url_for('index') }}><h1>Back</h1></a></div>
+
+		</div>
+
+	</body>
+
+
+</html>
